@@ -26,23 +26,41 @@ public class Parse {
         XPath xpath = factory.newXPath();
         // experimental XPATH query that will extract URL's
         // seems to work...
-        
-        
+
+
         XPathExpression expr = xpath.compile("//item/enclosure/@url"); // XPATH QUERY. 
 
 
 
         Object result = expr.evaluate(doc, XPathConstants.NODESET);
         NodeList nodes = (NodeList) result;
-        
+
         System.out.println("Parsed XML file sucessfully.. Displaying Results");
-        
-        for (int i = 0; i < nodes.getLength(); i++) {
-            System.out.println(nodes.item(i).getNodeValue());
+
+        //for (int i = 0; i < nodes.getLength(); i++) {
+          //  System.out.println(nodes.item(i).getNodeValue());
             // OUTPUT urls.
+       // }
+
+        try {
+           // FileWriter outFile = new FileWriter(args[0]);
+            PrintWriter out = new PrintWriter("output.txt");
+
+            // Also could be written as follows on one line
+            // Printwriter out = new PrintWriter(new FileWriter(args[0]));
+            // Write text to file
+            //out.println("This is line 1");
+            for (int i = 0; i < nodes.getLength(); i++) {
+                out.println(nodes.item(i).getNodeValue());
+                // OUTPUT urls.
+            }
+
+
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-            
 
 
 
